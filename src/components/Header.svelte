@@ -22,7 +22,7 @@
 
 <header class="text-center mb-8 animate-fadeIn relative">
   <div class="flex items-center justify-center relative">
-    <h1 class="text-4xl md:text-5xl font-bold mb-2">
+    <h1 class="text-4xl md:text-5xl font-bold mb-2" style="color: inherit;">
       Todo List
     </h1>
     <button 
@@ -36,7 +36,7 @@
       </svg>
     </button>
   </div>
-  <div class="mt-4 text-sm opacity-70">
+  <div class="mt-4 text-sm opacity-70" style="color: inherit;">
     {currentDate}
   </div>
 </header>

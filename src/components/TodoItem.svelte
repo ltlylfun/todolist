@@ -12,7 +12,6 @@
   function startEdit() {
     isEditing = true
     editText = todo.text
-    // 等待 DOM 更新后聚焦
     setTimeout(() => {
       if (editInput) {
         editInput.focus()
@@ -50,6 +49,40 @@
       minute: '2-digit'
     })
   }
+  
+  function formatDueDate(dateString) {
+    if (!dateString) return ''
+    const date = new Date(dateString)
+    const today = new Date()
+    const tomorrow = new Date(today)
+    tomorrow.setDate(today.getDate() + 1)
+    
+    if (isSameDay(date, today)) {
+      return '今天'
+    } else if (isSameDay(date, tomorrow)) {
+      return '明天'
+    } else {
+      return date.toLocaleDateString('zh-CN', {
+        month: 'short',
+        day: 'numeric'
+      })
+    }
+  }
+  
+  function isSameDay(date1, date2) {
+    return date1.getFullYear() === date2.getFullYear() &&
+           date1.getMonth() === date2.getMonth() &&
+           date1.getDate() === date2.getDate()
+  }
+  
+  function isOverdue(dateString) {
+    if (!dateString) return false
+    const dueDate = new Date(dateString)
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    dueDate.setHours(0, 0, 0, 0)
+    return dueDate < today && !todo.completed
+  }
 </script>
 
 <div class="todo-item bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-4 border border-current border-opacity-20 hover:border-current hover:border-opacity-40 {todo.completed ? 'todo-completed' : ''}">>
@@ -80,18 +113,37 @@
         />
       {:else}
         <div class="flex items-center justify-between">
-          <span 
-            class="cursor-pointer hover:opacity-80 transition-colors {todo.completed ? 'line-through opacity-50' : ''}"
-            on:click={startEdit}
-            on:keydown={(e) => e.key === 'Enter' && startEdit()}
-            role="button"
-            tabindex="0"
-          >
-            {todo.text}
-          </span>
+          <div class="flex-1">
+            <span 
+              class="cursor-pointer hover:opacity-80 transition-colors {todo.completed ? 'line-through opacity-50' : ''}"
+              on:click={startEdit}
+              on:keydown={(e) => e.key === 'Enter' && startEdit()}
+              role="button"
+              tabindex="0"
+            >
+              {todo.text}
+            </span>
+            
+            <!-- 截止日期显示 -->
+            {#if todo.dueDate}
+              <div class="mt-1">
+                <span class="text-xs px-2 py-1 rounded-full
+                           {isOverdue(todo.dueDate) 
+                             ? 'bg-red-500 bg-opacity-20' 
+                             : 'bg-blue-500 bg-opacity-20'}"
+                      style="color: inherit; opacity: 0.8;">
+                  📅 {formatDueDate(todo.dueDate)}
+                  {#if isOverdue(todo.dueDate)}
+                    (逾期)
+                  {/if}
+                </span>
+              </div>
+            {/if}
+          </div>
+          
           <div class="flex items-center gap-2 ml-3">
             <!-- 创建时间 -->
-            <span class="text-xs opacity-60 hidden sm:block">
+            <span class="text-xs opacity-60 hidden sm:block" style="color: inherit;">
               {formatDate(todo.createdAt)}
             </span>
             
