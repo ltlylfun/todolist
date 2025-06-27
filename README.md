@@ -6,14 +6,27 @@
 
 一个简洁高效的待办事项（Todo List）应用，支持添加、编辑、删除、完成任务，按状态筛选，统计任务数量，并可自定义主题设置，适合日常任务管理。
 
-## 🎬 视频展示
+## 📸 界面展示
 
-<video width="800" controls>
-  <source src="public/todolistV.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+### 主界面
 
-> 演示视频展示了应用的主要功能和界面，支持 gif 背景，字体颜色自定义
+<p align="center">
+  <img src="public/QQ20250627-123921.png" alt="主界面" width="800">
+</p>
+
+### 日历界面
+
+<p align="center">
+  <img src="public/QQ20250627-123956.png" alt="日历界面" width="800">
+</p>
+
+### 番茄钟界面
+
+<p align="center">
+  <img src="public/QQ20250627-124004.png" alt="番茄钟界面" width="800">
+</p>
+
+> 应用界面简洁美观，支持任务管理、日历查看和番茄钟计时功能，可自定义 gif 背景，自定义字体颜色
 
 ## 📄 许可证
 
