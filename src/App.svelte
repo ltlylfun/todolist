@@ -5,8 +5,9 @@
   import Header from './components/Header.svelte'
   import Footer from './components/Footer.svelte'
   import Settings from './components/Settings.svelte'
+  import PomodoroTimer from './components/PomodoroTimer.svelte'
   
-  let currentView = 'todo' // 'todo' or 'calendar'
+  let currentView = 'todo' // 'todo', 'calendar', or 'pomodoro'
   let showSettings = false
   let backgroundImage = ''
   let textColor = '#ffffff'
@@ -131,19 +132,31 @@
         >
           日历
         </button>
+        <button
+          class="px-6 py-2 rounded-md text-sm font-medium transition-all duration-200
+                 {currentView === 'pomodoro' 
+                   ? 'bg-white bg-opacity-20 shadow-sm' 
+                   : 'opacity-70 hover:opacity-100'}"
+          style="color: inherit;"
+          on:click={() => currentView = 'pomodoro'}
+        >
+          番茄钟
+        </button>
       </div>
     </div>
     
     <div class="flex-1">
       {#if currentView === 'todo'}
         <TodoList on:todosUpdate={handleTodosUpdate} />
-      {:else}
+      {:else if currentView === 'calendar'}
         <Calendar 
           {todos}
           on:toggle={handleToggleTodo}
           on:delete={handleDeleteTodo}
           on:edit={handleEditTodo}
         />
+      {:else if currentView === 'pomodoro'}
+        <PomodoroTimer />
       {/if}
     </div>
     <Footer />

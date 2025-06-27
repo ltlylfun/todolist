@@ -6,11 +6,14 @@
 
 一个简洁高效的待办事项（Todo List）应用，支持添加、编辑、删除、完成任务，按状态筛选，统计任务数量，并可自定义主题设置，适合日常任务管理。
 
-## 🖼️ 截图展示
+## 🎬 视频展示
 
-![主界面](public/1.png)
+<video width="800" controls>
+  <source src="public/todolistV.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
-![设置界面](public/2.png)
+> 演示视频展示了应用的主要功能和界面，支持 gif 背景，字体颜色自定义
 
 ## 📄 许可证
 
